@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}       
+    <div class="container has-text-centered">
+    <h1 class="title">
+        Home page of the Flask/Dash authentification example
+    </h1>
+    <h2 class="subtitle">
+        Here your have access to some demonstration dashboards without loggin in
+    </h2>
+
+    <form method="GET" action='/app1'>
+        <button class="button is-block is-info is-large is-fullwidth" name="dashbutton" type="submit" value="dash1">Access DEMO dash1</button>
+    </form>
+    <br>
+    <form method="GET" action='/app2'>
+        <button class="button is-block is-info is-large is-fullwidth" name="dashbutton"type="submit" value="dash2">Access DEMO dash2</button>
+    </form>
+    <br>
+    <form method="GET" action='/dashapp/'>
+        <button class="button is-block is-info is-large is-fullwidth">DEMO button to inexistant url</button>
+    </form>
+    </div>
+{% endblock %}

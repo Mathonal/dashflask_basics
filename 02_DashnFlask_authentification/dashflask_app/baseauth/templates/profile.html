@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container has-text-centered">
+
+
+<h1 class="title">
+  Welcome, {{ name }}!
+</h1>
+
+{% if dashlist: %}
+    <h3 class="title">
+      Your dashboards
+    </h3>
+    {% for line in dashlist %}
+    <form method="POST" action='/mydash/'>
+        <button class="button is-block is-info is-large is-fullwidth" name="dashbutton" type="submit" value={{line.dashref}}>Access your {{line.dashref}} dashboard</button>
+    </form>
+    <br>
+    {% endfor %}
+{% else %}
+    <h2 class="subtitle">
+        You do not have any personnal dashboard linked to this user.
+    </h2>
+{% endif %}
+<br>
+<form method="POST" action='/mydash/'>
+    <button class="button is-block is-info is-large is-fullwidth" name="dashbutton" type="submit" value="dash1"> test button to inexistant dashboard</button>
+</form>
+
+
+    </div>
+{% endblock %}
