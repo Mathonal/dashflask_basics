@@ -5,7 +5,8 @@ from flask import current_app as app
 
 @app.route('/')
 def home():
-    """Landing page.
+    """
+        Landing page.
        Dashboard URL is in the 'index.jinja2' template as Href (/dashapp/)
     """
     return render_template(

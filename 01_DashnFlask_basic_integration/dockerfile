@@ -1,0 +1,27 @@
+# DESCRIPTION: flask app running DASH(board) components
+# AUTHORS: Alexis Mathon <mathonal@gmail.com>
+# USAGE:
+# 1- add other libs depending of project via requirements: pandas numpy etc.
+# 2- verify entry point for your project (WSGI, APP, INDEX ...)
+# 3- replace volume in DockerCommand by local var in RUN/alias command 
+# DOCKER IMAGE BUILD command :
+# 	docker build . -t delka/fdash
+# DOCKER RUN command :
+# 	docker run -it -p 5000:5000 -v /home/delka/work/GitRepos/mydynamicCV:/src delka/fdash
+#
+# NOTE : replace volume by local var in aliases command 
+#
+#FROM python:alpine
+FROM python:latest
+# alpine does have problems with dash ... (with brotli lib install via pip)
+
+# INSTALLING libs
+RUN pip install --upgrade pip
+# INSTALLING python flask libs from volume (project directory)
+WORKDIR /usr/src
+COPY requirements.txt .
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
+EXPOSE 5000
+
+ENTRYPOINT ["python", "/src/wsgi.py"]

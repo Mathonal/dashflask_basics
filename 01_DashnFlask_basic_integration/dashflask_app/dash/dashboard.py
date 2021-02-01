@@ -32,6 +32,7 @@ def init_dashboard(server):
         "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
     })
 
+    # Dash figure
     fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
 
     # Create Dash Layout

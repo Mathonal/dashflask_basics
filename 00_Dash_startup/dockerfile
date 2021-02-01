@@ -1,0 +1,26 @@
+# DESCRIPTION: Simple DASH(board) base app (mostly for development)
+# A- had some problems with light version of python (unable to install some libs via pip). So I use the "heavy" version
+# B- have another version coupled with flask for more advanced web functions (https://github.com/Mathonal/mydockerfiles)
+# AUTHORS: Alexis Mathon <mathonal@gmail.com>
+# USAGE:
+# 1- add other libs depending of project via requirements: pandas numpy etc.
+# 2- verify entry point for your project (WSGI, APP, INDEX ...)
+# 3- replace volume in DockerCommand by local var in RUN/alias command 
+# DOCKER IMAGE BUILD command :
+# 	docker build . -t delka/dash
+# DOCKER RUN command :
+# 	docker run -it -p 8050:8050 -v /home/delka/{RESTOFPATH}:/src delka/dash
+#
+#FROM python:alpine # alpine does have problems with dash ... (with brotli lib install via pip)
+FROM python:latest
+# INSTALLING libs
+RUN pip install --upgrade pip
+# INSTALLING python flask libs from volume (project directory)
+WORKDIR /usr/src
+COPY requirements.txt .
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+EXPOSE 8050
+#
+#ENTRYPOINT ["python","/src/index.py"]
+ENTRYPOINT ["python","/src/app.py"]
+#ENTRYPOINT ["python","/src/wsgi.py"]
